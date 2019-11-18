@@ -34,6 +34,22 @@ export default {
          shops: state => state.shops,
        }),
      },
+     mounted() {
+        // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+        if ("geolocation" in navigator) {
+          // geolocation is available
+          // get location and update map
+          navigator.geolocation.getCurrentPosition(position => {
+            this.center = latLng(
+              position.coords.latitude,
+              position.coords.longitude
+            );
+            this.zoom = 15;
+          });
+        } else {
+          /* geolocation IS NOT available */
+        }
+     }
 }
 </script>
 
