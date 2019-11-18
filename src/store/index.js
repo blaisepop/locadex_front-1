@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import products from './modules/products'
+import map from './modules/map'
 
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ const LOCAL_STORAGE_KEY = 'locadex_vuex_database'
 const store = new Vuex.Store({
   modules: {
     products,
+    map,
   },
   mutations: {
     // Initialize saved state from local localStorage

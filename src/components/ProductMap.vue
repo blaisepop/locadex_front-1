@@ -1,5 +1,5 @@
 <template lang="html">
-  <l-map :zoom="zoom" :center="center">
+  <l-map :zoom="zoom" :center="center" v-on:update:center="updateCenter">
     <l-tile-layer :url="url"  :attribution="attribution"></l-tile-layer>
     <ShopMarker  :shop="shop" :key="shop.id" v-for="shop in shops" />
   </l-map>
@@ -27,6 +27,15 @@ export default {
          center: latLng(46.9483, 7.4513),
          url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
          attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+       }
+     },
+     methods: {
+       updateCenter: function (center) {
+         this.$store.dispatch('map/updateCoordinates', {
+           latitude: center.lat,
+           longitude: center.lng,
+           zoom: this.zoom,
+         })
        }
      },
      computed: {
