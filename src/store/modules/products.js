@@ -26,11 +26,15 @@ const getters = {
 
 // actions
 const actions = {
-  search({commit}, term) {
+  search({commit, rootState}, term) {
     commit('SET_TERM', term)
 
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set("q", term);
+    searchParams.set("latitude", rootState.map.latitude);
+    searchParams.set("longitude", rootState.map.longitude);
+    searchParams.set("zoom", rootState.map.zoom);
+
     window.history.pushState({}, this.term, searchParams.toString());
 
     if (!term) {
@@ -42,7 +46,7 @@ const actions = {
 
     commit('SET_IS_LOADING', true)
 
-    axios.get(`${api_url}/product_shops`, {params: {q: term}})
+    axios.get(`${api_url}/product_shops`, {params: searchParams})
         .then(response => {
           // this.acts = response.data.data
           const responseData = response.data
