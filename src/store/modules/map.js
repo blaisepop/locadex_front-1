@@ -1,7 +1,4 @@
 
-const axios = require('axios')
-const api_url = require('../../config').api_url
-
 // initial state
 const state = {
   latitude: null,
@@ -11,15 +8,6 @@ const state = {
 
 // getters
 const getters = {
-  // products: state => {
-  //   return state.products
-  // },
-  // term: state => {
-  //   return state.term
-  // },
-  // productShops: (state) => {
-  //   return state.productShops
-  // }
 }
 
 // actions
